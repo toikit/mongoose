@@ -5,7 +5,7 @@ import { setData, getData, resolve, declare, getDeclaration, getConfig } from "@
 let connections: any = {};
 
 // Model
-export function model(name: String, conn:any = 'default') {
+export function model(name: string, conn: string = 'default') {
   let accessName = '__db_' +conn + '_model_' + name;
   return resolve('model_' + accessName);
 };
@@ -32,7 +32,7 @@ export function declareModel(names: any) {
 
     let databaseConfig = getConfig('mongo')?.connections || {};
     
-    if (!databaseConfig.hasOwnProperty(conn)) throw Error('Database connection ' + conn + ' is not exitst');
+    if (!databaseConfig.hasOwnProperty(conn)) throw Error('Database connection ' + conn + ' does not exist');
     if (!connections[conn]) {
       connections[conn] = mongoose.createConnection(databaseConfig[conn].uri, databaseConfig[conn]?.options);
     }
